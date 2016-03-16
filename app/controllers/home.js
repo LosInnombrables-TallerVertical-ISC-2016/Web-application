@@ -9,7 +9,6 @@ module.exports = function (app) {
 
 
 //PUT  method
-//TO-DO: area if this method is to big for a restfull API
 router.route('/api').put(function(req, res){
   console.log("Buscando: " + req.body.name);
   var query = {name: req.body.name};
@@ -48,6 +47,62 @@ router.route('/api').put(function(req, res){
     });
   });
 });
+
+//PUT TIMEOUT method
+router.route('/mobile').put(function(req, res){
+  console.log("Buscando: " + req.body.name);
+  var query = {name: req.body.name};
+  Area.findOne(query, function (err, area) {
+    if(err){
+      return res.status(404).send(err);
+    }
+
+    if(!area){
+      return res.status(404);
+    }
+
+    if(req.body.handicapAvailable == null || (area.handicapCapacity == area.handicapAvailable && req.body.handicapAvailable > 0) ||
+        (area.handicapAvailable == 0 && req.body.handicapAvailable < 0) ){
+      console.log("null handicap");
+      req.body.handicapAvailable = 0;
+    }
+
+    if(req.body.generalAvailable == null || (area.generalCapacity == area.generalAvailable && req.body.generalAvailable > 0) ||
+        (area.generalAvailable == 0 && req.body.generalAvailable < 0)){
+      console.log("null general");
+      req.body.generalAvailable = 0;
+    }
+
+    var update = { $inc: {generalAvailable: req.body.generalAvailable,
+                          handicapAvailable: req.body.handicapAvailable}
+                 };
+    var options = {new: true};
+
+    Area.findOneAndUpdate(query, update, options, function(err, doc) {
+      if (err) {
+        console.log('got an error');
+        return res.status(500).send(err);
+      }
+      console.log("Waiting");
+      setTimeout(resetCounter, 10000, req, query, res);
+      return res.status(200).send(doc);
+    });
+  });
+});
+
+var test = function(s){console.log(s  )};
+var resetCounter = function(req, query, res){
+  console.log("Executing");
+  update = { $inc: {generalAvailable: -1* req.body.generalAvailable,
+                        handicapAvailable: -1 * req.body.handicapAvailable}
+               };
+  var options = {new: true};
+  Area.findOneAndUpdate(query, update, options, function(err, doc) {
+    if (err) {
+      console.log('got an error');
+    }
+  });
+}
 
 
 //GET method
@@ -102,7 +157,7 @@ router.route('/api/').delete(function(req, res){
 
 //METHODS IN TESTING
 
-router.route('/test').put(function(req, res){
+router.route('/testPUT').put(function(req, res){
   console.log("Buscando: " + req.body.name);
   var query = {name: req.body.name};
   var update = {
