@@ -5,4 +5,4 @@ An app for the admistrators where only us can make changes to the app or the web
 
 When the administrators get usefull data from the users, like the most popular area, or the peak times where the parking lot is almost full, the app should evolve in order to make the user experience better. Maybe recommending areas for users that go to that area relativelly often, or in the necesary case, implement a new area.
 
-![Image of Yaktocat](https://octodex.github.com/images/yaktocat.png)
+![WebApp Diagram](WebAppDiagram.png)
