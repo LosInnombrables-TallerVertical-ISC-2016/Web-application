@@ -8,7 +8,8 @@ var AreaSchema = new Schema({
   generalCapacity: Number,
   handicapCapacity: Number,
   generalAvailable: Number,
-  handicapAvailable: Number
+  handicapAvailable: Number,
+  priority: Number
 });
 
 AreaSchema.virtual('date')

@@ -36,6 +36,7 @@ if(loader){
           handicapCapacity: csv[area].handicapAvailable,
           generalAvailable: csv[area].generalAvailable,
           handicapAvailable: csv[area].handicapAvailable,
+          priority: csv[area].priority,
         });
       }
     });

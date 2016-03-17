@@ -11,6 +11,7 @@ module.exports = function (app) {
 //PUT  method
 router.route('/api').put(function(req, res){
   console.log("Buscando: " + req.body.name);
+  console.log("General Available:" + req.body.generalAvailable);
   var query = {name: req.body.name};
   Area.findOne(query, function (err, area) {
     if(err){
@@ -83,16 +84,15 @@ router.route('/mobile').put(function(req, res){
         console.log('got an error');
         return res.status(500).send(err);
       }
-      console.log("Waiting");
-      setTimeout(resetCounter, 10000, req, query, res);
+      console.log("Booking a temporaly place...");
+      setTimeout(resetCounter, 60000, req, query, res);
       return res.status(200).send(doc);
     });
   });
 });
 
-var test = function(s){console.log(s  )};
 var resetCounter = function(req, query, res){
-  console.log("Executing");
+  console.log("Booking expired.");
   update = { $inc: {generalAvailable: -1* req.body.generalAvailable,
                         handicapAvailable: -1 * req.body.handicapAvailable}
                };
