@@ -23,11 +23,13 @@ app.listen(config.port, function () {
 
 
 //Populate database with the CSV
+//Change this variable to make an auto populate with test values.
+var populate = false;
 var loader = require('csv-load-sync');
 var csv = loader('config/seed.csv');
 var Area = mongoose.model('Areas');
 
-if(loader){
+if(loader && populate){
   console.log("CSV Loaded.");
     Area.find({}).remove(function() {
       for(area in csv){

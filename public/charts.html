@@ -17,6 +17,9 @@
     <!-- Custom CSS -->
     <link href="css/sb-admin.css" rel="stylesheet">
 
+    <!-- Morris Charts CSS -->
+    <link href="css/plugins/morris.css" rel="stylesheet">
+
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
@@ -45,9 +48,9 @@
                 </button>
                 <a class="navbar-brand" href="index.html">You Park</a>
             </div>
-            <!-- Top Menu Items -->
+            <!-- Top Menu Items
             <ul class="nav navbar-right top-nav">
-                
+
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> John Smith <b class="caret"></b></a>
                     <ul class="dropdown-menu">
@@ -66,20 +69,22 @@
                         </li>
                     </ul>
                 </li>
-            </ul>
+            </ul> -->
             <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
- 
-                    <li>
-                        <a href="charts.html"><i class="fa fa-fw fa-bar-chart-o"></i> Paking Stadistics</a>
-                    </li>
-                    <li class="active">
-                        <a href="tables.html"><i class="fa fa-fw fa-table"></i> Parking Status</a>
-                    </li>
-                    
-                    <img src="C:\Users\Andres\Google Drive\School\Talle Vertical\startbootstrap-sb-admin-1.0.4\bot2eyes.fw.png" alt="Toby" class="img-responsive" width= 60% \9 .pull-left>
-                    
+                      <li  class="active">
+                          <a href="charts.html"><i class="fa fa-fw fa-bar-chart-o"></i> Paking Stadistics</a>
+                      </li>
+                      <li>
+                          <a href="tables.html"><i class="fa fa-fw fa-table"></i> Parking Status</a>
+                      </li>
+                      <li>
+                          <a href="FileUpload.html"><i class="fa fa-file-o"></i> Upload a CSV</a>
+                      </li>
+                      <li>
+                          <img src="bot2eyes.fw.png" alt="Toby" class="img-responsive" width= 60% \9 .pull-left>
+                      </li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -93,32 +98,45 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            Parking Satus
+                            Parking Satidistics
                         </h1>
                         <ol class="breadcrumb">
-                          <li>
+                            <li>
                                 <i class="fa fa-dashboard"></i>  <a href="index.html">Dashboard</a>
                             </li>
                             <li class="active">
-                                <i class="fa fa-table"></i> Parking
+                                <i class="fa fa-bar-chart-o"></i> Parking Stadistics
                             </li>
                         </ol>
                     </div>
                 </div>
 
-                <div>
+
+                <!-- Morris Charts -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h2 class="page-header">Parking Stadistics</h2>
+                      <!--  <p class="lead">Morris.js is a very simple API for drawing line, bar, area and donut charts. For full usage instructions and documentation for Morris.js charts, visit <a href="http://morrisjs.github.io/morris.js/">http://morrisjs.github.io/morris.js/</a>.</p> -->
+                    </div>
+                </div>
                 <!-- /.row -->
 
-                    <h1>Parking space</h1>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-green">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> Parking quota by time </h3>
+                            </div>
+                            <div class="panel-body">
+                                <div id="morris-area-chart"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                 <div class="progress">
-                    <div class="progress-bar progress-bar-danger" style="width: 30%"><span class="sr-only">100% Complete (danger)</span> 30/40
+                <!-- /.row -->
+
+                        </div>
                     </div>
-                    <div class="progress-bar progress-bar-warning" style="width: 20%"><span class="sr-only">20% Complete (warning)</span> 20/40
-                    </div>
-                    <div class="progress-bar progress-bar-success" style="width: 10%"><span class='sr-only'>10% Complete (danger)</span>10/40
-                    </div>
-                </div>
                 </div>
                 <!-- /.row -->
 
@@ -136,6 +154,19 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
+
+    <!-- Morris Charts JavaScript -->
+    <script src="js/plugins/morris/raphael.min.js"></script>
+    <script src="js/plugins/morris/morris.min.js"></script>
+    <script src="js/plugins/morris/morris-data.js"></script>
+
+    <!-- Flot Charts JavaScript -->
+    <!--[if lte IE 8]><script src="js/excanvas.min.js"></script><![endif]-->
+    <script src="js/plugins/flot/jquery.flot.js"></script>
+    <script src="js/plugins/flot/jquery.flot.tooltip.min.js"></script>
+    <script src="js/plugins/flot/jquery.flot.resize.js"></script>
+    <script src="js/plugins/flot/jquery.flot.pie.js"></script>
+    <script src="js/plugins/flot/flot-data.js"></script>
 
 </body>
 

@@ -6,6 +6,8 @@ var express = require('express'),
 var multer  = require('multer');
 var upload = multer({ dest: 'app/uploads/' });
 
+
+
 module.exports = function (app) {
   app.use('/', router);
 };
@@ -67,6 +69,8 @@ router.route('/api').put(function(req, res){
 
 //GET method
 router.route('/api/').get(function(req, res){
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   Area.find(function(err, movies){
     if(err){
       return res.status(500).send(err);
@@ -88,6 +92,10 @@ router.route('/api/').post(function(req, res){
 
 //DELETE
 router.route('/api/').delete(function(req, res){
+  //WARNING: use clean database just in development enviroment
+  if(req.body._id == "clean database"){
+    Area.find({}).remove(function() { return res.status(200).send("Database cleaned")});
+  }
   Area.findById(req.body._id, function(err, movie){
       if(err){
         return
@@ -164,7 +172,7 @@ router.route('/mobile').put(function(req, res){
 
 
 //API: /seed
-router.post('/seed', function(req, res){
+router.post('/api/seed', function(req, res){
   console.log(req.body.data);
   data = JSON.parse(req.body.data);
   for(var i = 0; i < data.length; i++){
@@ -174,7 +182,7 @@ router.post('/seed', function(req, res){
       }
     });
   }
-  return res.status(201).json(Area);
+  return res.status(200).json(Area);
 
 });
 

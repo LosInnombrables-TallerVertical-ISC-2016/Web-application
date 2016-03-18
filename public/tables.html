@@ -17,11 +17,11 @@
     <!-- Custom CSS -->
     <link href="css/sb-admin.css" rel="stylesheet">
 
-    <!-- Morris Charts CSS -->
-    <link href="css/plugins/morris.css" rel="stylesheet">
-
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -30,6 +30,41 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    <script type="text/javascript">
+      var loadTables = function(data){
+        var table = $("#tables");
+        for(var i = 0; i < data.length; i ++){
+          var capacity = parseInt(data[i]["generalCapacity"]);
+          var occuped = capacity - parseInt(data[i]["generalAvailable"]);
+          var clase;
+
+          var percentaje = Math.round(((occuped/capacity)*100));
+          if(percentaje >= 80){
+            clase = "progress-bar progress-bar-danger";
+          }
+          if(percentaje < 80){
+            clase = "progress-bar progress-bar-warning";
+          }
+          if(percentaje < 50){
+            clase = "progress-bar progress-bar-success";
+          }
+
+          var str = "<div > Area: " + data[i]["name"]+"</div>";
+          str =  str + "<div  class='progress'><div class='"+clase+"' style='width:"+percentaje+"%;'>";
+          str = str + occuped +"/"+capacity+" </div>";
+          str = str + "</div>";
+          console.log(str);
+          table.append(str);
+        }
+      }
+
+      $(document).ready(function() {
+        $.get( "http://10.43.14.124:3000/api" )
+          .done(function( data ) {
+            loadTables(data);
+        });
+      });
+    </script>
 </head>
 
 <body>
@@ -48,9 +83,9 @@
                 </button>
                 <a class="navbar-brand" href="index.html">You Park</a>
             </div>
-            <!-- Top Menu Items -->
+            <!-- Top Menu Items
             <ul class="nav navbar-right top-nav">
-               
+
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> John Smith <b class="caret"></b></a>
                     <ul class="dropdown-menu">
@@ -69,19 +104,22 @@
                         </li>
                     </ul>
                 </li>
-            </ul>
+            </ul> -->
             <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
-                    
-                    <li class="active">
-                        <a href="charts.html"><i class="fa fa-fw fa-bar-chart-o"></i> Paking Stadistics</a>
-                    </li>
-                    <li>
-                        <a href="tables.html"><i class="fa fa-fw fa-table"></i> Parking Status</a>
-                    </li>
-                    
-                    <img src="C:\Users\Andres\Google Drive\School\Talle Vertical\startbootstrap-sb-admin-1.0.4\bot2eyes.fw.png" alt="Toby" class="img-responsive" width= 60% \9 .pull-left>
+                  <li>
+                      <a href="charts.html"><i class="fa fa-fw fa-bar-chart-o"></i> Paking Stadistics</a>
+                  </li>
+                  <li class="active">
+                      <a href="tables.html"><i class="fa fa-fw fa-table"></i> Parking Status</a>
+                  </li>
+                  <li>
+                      <a href="FileUpload.html"><i class="fa fa-file-o"></i> Upload a CSV</a>
+                  </li>
+                  <li>
+                      <img src="bot2eyes.fw.png" alt="Toby" class="img-responsive" width= 60% \9 .pull-left>
+                  </li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -95,48 +133,29 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            Parking Satidistics
+                            Parking Status
                         </h1>
                         <ol class="breadcrumb">
-                            <li>
+                          <li>
                                 <i class="fa fa-dashboard"></i>  <a href="index.html">Dashboard</a>
                             </li>
                             <li class="active">
-                                <i class="fa fa-bar-chart-o"></i> Parking Stadistics
+                                <i class="fa fa-table"></i> Parking
                             </li>
                         </ol>
                     </div>
                 </div>
-                            
 
-                <!-- Morris Charts -->
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h2 class="page-header">Parking Stadistics</h2>
-                        <p class="lead">Morris.js is a very simple API for drawing line, bar, area and donut charts. For full usage instructions and documentation for Morris.js charts, visit <a href="http://morrisjs.github.io/morris.js/">http://morrisjs.github.io/morris.js/</a>.</p>
-                    </div>
-                </div>
+                <div>
                 <!-- /.row -->
 
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="panel panel-green">
-                            <div class="panel-heading">
-                                <h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> Parking quota by time </h3>
-                            </div>
-                            <div class="panel-body">
-                                <div id="morris-area-chart"></div>
-                            </div>
-                        </div>
-                    </div>
+                    <h1>Parking space</h1>
                 </div>
-                <!-- /.row -->
-                           
-                        </div>
-                    </div>
-                </div>
-                <!-- /.row -->
+                 <div id="tables">
 
+                 </div>
+                </div>
+                <!-- /.row -->
             </div>
             <!-- /.container-fluid -->
 
@@ -146,24 +165,10 @@
     </div>
     <!-- /#wrapper -->
 
-    <!-- jQuery -->
-    <script src="js/jquery.js"></script>
+
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
-
-    <!-- Morris Charts JavaScript -->
-    <script src="js/plugins/morris/raphael.min.js"></script>
-    <script src="js/plugins/morris/morris.min.js"></script>
-    <script src="js/plugins/morris/morris-data.js"></script>
-
-    <!-- Flot Charts JavaScript -->
-    <!--[if lte IE 8]><script src="js/excanvas.min.js"></script><![endif]-->
-    <script src="js/plugins/flot/jquery.flot.js"></script>
-    <script src="js/plugins/flot/jquery.flot.tooltip.min.js"></script>
-    <script src="js/plugins/flot/jquery.flot.resize.js"></script>
-    <script src="js/plugins/flot/jquery.flot.pie.js"></script>
-    <script src="js/plugins/flot/flot-data.js"></script>
 
 </body>
 

@@ -47,7 +47,7 @@
                 </button>
                 <a class="navbar-brand" href="index.html">UPark</a>
             </div>
-            <!-- Top Menu Items -->
+            <!-- Top Menu Items
             <ul class="nav navbar-right top-nav">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> <b class="caret"></b></a>
@@ -123,13 +123,22 @@
                         </li>
                     </ul>
                 </li>
-            </ul>
+            </ul>-->
             <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
-                    <li class="active">
-                        <a href="FileUpload.html"><i class="fa fa-file-o"></i> Upload a file</a>
-                    </li>
+                  <li>
+                      <a href="charts.html"><i class="fa fa-fw fa-bar-chart-o"></i> Paking Stadistics</a>
+                  </li>
+                  <li>
+                      <a href="tables.html"><i class="fa fa-fw fa-table"></i> Parking Status</a>
+                  </li>
+                  <li class="active">
+                      <a href="FileUpload.html"><i class="fa fa-file-o"></i> Upload a CSV</a>
+                  </li>
+                  <li>
+                      <img src="bot2eyes.fw.png" alt="Toby" class="img-responsive" width= 60% \9 .pull-left>
+                  </li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -147,12 +156,13 @@
                             Upload a file
                         </h1>
                         <h5 class="page-header">
-                            <input hr type="file" id="fileInput">
-                            <input type='submit'>
+                            <input type="file" id="fileInput" value="Choose file"></input>
+                            <input type='submit' value="Seed file" onclick="post()"></input>
                         </h5>
                     </div>
-                    <div >
-                        
+                    <div class="col-lg-12" >
+                        <div id="sucessmessage" class="alert alert-success" role="alert" style="display:none;"><b>Well done! </b>Server seeded correctly.</div>
+                        <div id="errormessage" class="alert alert-danger" role="alert" style="display:none;"><b>Oh snap!</b> Change a few things up and try submitting again.</div>
                     </div>
 
                     <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
@@ -161,6 +171,7 @@
                     <script type="text/javascript">
                         var fileInput = document.getElementById('fileInput');
                         var fileDisplayArea = document.getElementById('fileDisplayArea');
+                        var areas = [];
 
                         //Definiction object area
                         var Area = function(name){
@@ -183,14 +194,14 @@
                                     var result = reader.result.replace(/\n/g, ",").split(",");
                                     var lastChar = result[0];
                                     var temp = new Area(lastChar);
-                                    var areas = [];
+                                    areas = [];
                                     //FROM César to Salinas .l.
                                     for(var i = 0, count = 0, acum = 0, count2 = 1; i < result.length; i++, count2++){
                                         if(i % 3 == 0 && result[i] !=  lastChar){
                                             lastChar = result[i];
 
                                             temp.generalCapacity = parseInt(result[i-2]);
-                                            temp.generalAvailable = parseInt(result[i-2]) - acum;
+                                            temp.generalAvailable = acum;
 
                                             areas[count] = temp;
                                             temp = new Area(lastChar);
@@ -205,8 +216,8 @@
                                     }
                                     printAreas(areas);
                                 }
-                                reader.readAsText(file);    
-                            } 
+                                reader.readAsText(file);
+                            }
                             else {
                                 fileDisplayArea.innerText = "File not supported!"
                             }
@@ -214,7 +225,7 @@
 
                         function printAreas(array){
                             var div = document.getElementById('Area');
-                           
+
                             for(var i = 0; i < array.length; i++){
                                 var clone = div.cloneNode(true);
                                 clone.id = "Area-" + array[i]["name"];
@@ -228,6 +239,28 @@
                                 $(clone).find('#priority').text(array[i]["priority"]);
                                 document.getElementById("areaContainer").appendChild(clone);
                             }
+                        }
+
+                        function post(){
+                          console.log("posting");
+                          jQuery.ajax({
+                                    url: "http://10.43.14.124:3000/api/seed" ,
+                                    type: "POST",
+                                    data: {data: JSON.stringify(areas) },
+                                    dataType: "json",
+                                    beforeSend: function(x) {
+                                      if (x && x.overrideMimeType) {
+                                        x.overrideMimeType("application/j-son;charset=UTF-8");
+                                      }
+                                    },
+                                    success: function(result) {
+                                      $(".remove").remove();
+                                    },
+                                    error: function(result){
+                                      $(".remove").remove();
+                                    }
+                          });
+                          $("#sucessmessage").show();
                         }
                     </script>
                 </div>
@@ -247,7 +280,7 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
 
-  <div class="col-lg-4" id = "Area" style="display: none;">
+  <div class="col-lg-4 remove" id = "Area" style="display: none;">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title"><i class="fa fa-file-o" id="area"></i></h3>
