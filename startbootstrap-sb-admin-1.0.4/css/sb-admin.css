@@ -166,12 +166,8 @@ ul.alert-dropdown {
     height: 100%;
 }
 
-
 /* Custom Colored Panels */
 
-.huge {
-    font-size: 40px;
-}
 
 .panel-green {
     border-color: #5cb85c;
@@ -225,8 +221,6 @@ ul.alert-dropdown {
 
 .panel-yellow > a:hover {
     color: #df8a13;
-}
-
 
 /* New CSS */
 
@@ -235,5 +229,4 @@ ul.alert-dropdown {
 .videoloop {
     width:60%;
     height:auto; 
-
 }

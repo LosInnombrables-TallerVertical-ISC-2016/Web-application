@@ -4962,6 +4962,8 @@ a.badge:focus {
   padding-top: 30px;
   padding-bottom: 30px;
   margin-bottom: 30px;
+  color: inherit;
+  background-color: #eee;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -4975,7 +4977,7 @@ a.badge:focus {
   -webkit-transform: translateX(-50%) translateY(-50%);
   transform: translateX(-50%) translateY(-50%);
   background: url(vid.jpg) no-repeat;
-  background-size: cover; 
+  background-size: cover;
 }
 .jumbotron h1,
 .jumbotron .h1 {
