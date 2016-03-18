@@ -3,11 +3,27 @@ var express = require('express'),
   mongoose = require('mongoose'),
   Area = mongoose.model('Areas');
 
+var multer  = require('multer');
+var upload = multer({ dest: 'app/uploads/' });
+
 module.exports = function (app) {
   app.use('/', router);
 };
 
 
+//API: http
+//GET method
+router.get('/', function (req, res, next) {
+  Area.find(function (err, Areas) {
+    if (err) return next(err);
+    res.render('index', {
+      title: 'Generator-Express MVC',
+      Areas: Areas
+    });
+  });
+});
+
+// API: /api
 //PUT  method
 router.route('/api').put(function(req, res){
   console.log("Buscando: " + req.body.name);
@@ -49,7 +65,62 @@ router.route('/api').put(function(req, res){
   });
 });
 
+//GET method
+router.route('/api/').get(function(req, res){
+  Area.find(function(err, movies){
+    if(err){
+      return res.status(500).send(err);
+    }
+
+    return res.json(movies);
+  });
+});
+
+//POST method
+router.route('/api/').post(function(req, res){
+  Area.create(req.body, function(err, Area){
+    if(err){
+      return handleError(res, err);
+    }
+    return res.status(201).json(Area);
+  });
+});
+
+//DELETE
+router.route('/api/').delete(function(req, res){
+  Area.findById(req.body._id, function(err, movie){
+      if(err){
+        return
+      }
+      if(!movie){
+        return res.status(204).send('Key ' + req.body._id + ' already deleted.');
+      }
+      Area.remove(req.body, function(err){
+        if(err){
+          return res.status(500).send(err);
+        }
+        return res.status(200).send('Key ' + req.body._id + ' deleted.');
+      });
+  });
+});
+
+
+//API: /mobile
+
 //PUT TIMEOUT method
+var resetCounter = function(req, query, res){
+  console.log("Booking expired.");
+  update = { $inc: {generalAvailable: -1* req.body.generalAvailable,
+                        handicapAvailable: -1 * req.body.handicapAvailable}
+               };
+  var options = {new: true};
+  Area.findOneAndUpdate(query, update, options, function(err, doc) {
+    if (err) {
+      console.log('got an error');
+    }
+  });
+}
+
 router.route('/mobile').put(function(req, res){
   console.log("Buscando: " + req.body.name);
   var query = {name: req.body.name};
@@ -91,72 +162,23 @@ router.route('/mobile').put(function(req, res){
   });
 });
 
-var resetCounter = function(req, query, res){
-  console.log("Booking expired.");
-  update = { $inc: {generalAvailable: -1* req.body.generalAvailable,
-                        handicapAvailable: -1 * req.body.handicapAvailable}
-               };
-  var options = {new: true};
-  Area.findOneAndUpdate(query, update, options, function(err, doc) {
-    if (err) {
-      console.log('got an error');
-    }
-  });
-}
 
-
-//GET method
-router.get('/', function (req, res, next) {
-  Area.find(function (err, Areas) {
-    if (err) return next(err);
-    res.render('index', {
-      title: 'Generator-Express MVC',
-      Areas: Areas
-    });
-  });
-});
-
-//GET method
-router.route('/api/').get(function(req, res){
-  Area.find(function(err, movies){
-    if(err){
-      return res.status(500).send(err);
-    }
-    return res.json(movies);
-  });
-});
-
-//POST method
-router.route('/api/').post(function(req, res){
-  Area.create(req.body, function(err, Area){
-    if(err){
-      return handleError(res, err);
-    }
-    return res.status(201).json(Area);
-  });
-});
-
-//DELETE
-router.route('/api/').delete(function(req, res){
-  Area.findById(req.body._id, function(err, movie){
+//API: /seed
+router.post('/seed', function(req, res){
+  console.log(req.body.data);
+  data = JSON.parse(req.body.data);
+  for(var i = 0; i < data.length; i++){
+    Area.create(data[i], function(err, Area){
       if(err){
-        return
+        return handleError(res, err);
       }
-      if(!movie){
-        return res.status(204).send('Key ' + req.body._id + ' already deleted.');
-      }
-      Area.remove(req.body, function(err){
-        if(err){
-          return res.status(500).send(err);
-        }
-        return res.status(200).send('Key ' + req.body._id + ' deleted.');
-      });
-  });
-});
+    });
+  }
+  return res.status(201).json(Area);
 
+});
 
 //METHODS IN TESTING
-
 router.route('/testPUT').put(function(req, res){
   console.log("Buscando: " + req.body.name);
   var query = {name: req.body.name};

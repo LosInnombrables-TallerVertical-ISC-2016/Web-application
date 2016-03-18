@@ -21,6 +21,7 @@ app.listen(config.port, function () {
   console.log('Express server listening on port ' + config.port);
 });
 
+
 //Populate database with the CSV
 var loader = require('csv-load-sync');
 var csv = loader('config/seed.csv');
