@@ -159,6 +159,7 @@
                             <input type="file" id="fileInput" value="Choose file"></input>
                             <input type='submit' value="Seed file" onclick="post()"></input>
                         </h5>
+                        <h3 id="preview" style="display: none;">File preview: </h3>
                     </div>
                     <div class="col-lg-12" >
                         <div id="sucessmessage" class="alert alert-success" role="alert" style="display:none;"><b>Well done! </b>Server seeded correctly.</div>
@@ -238,6 +239,7 @@
                                 $(clone).find('#hAvailable').text(array[i]["handicapAvailable"]);
                                 $(clone).find('#priority').text(array[i]["priority"]);
                                 document.getElementById("areaContainer").appendChild(clone);
+                                $("#preview").show();
                             }
                         }
 
@@ -261,6 +263,8 @@
                                     }
                           });
                           $("#sucessmessage").show();
+                          $("#preview").hide();
+
                         }
                     </script>
                 </div>
