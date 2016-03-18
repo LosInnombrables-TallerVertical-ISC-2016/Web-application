@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>UPark</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/sb-admin.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Library of CSV -->
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">UPark</a>
+            </div>
+            <!-- Top Menu Items
+            <ul class="nav navbar-right top-nav">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> <b class="caret"></b></a>
+                    <ul class="dropdown-menu message-dropdown">
+                        <li class="message-preview">
+                            <a href="#">
+                                <div class="media">
+                                    <span class="pull-left">
+                                        <img class="media-object" src="http://placehold.it/50x50" alt="">
+                                    </span>
+                                    <div class="media-body">
+                                        <h5 class="media-heading">
+                                            <strong>Guest</strong>
+                                        </h5>
+                                        <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
+                                        <p>Lorem ipsum dolor sit amet, consectetur...</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="message-preview">
+                            <a href="#">
+                                <div class="media">
+                                    <span class="pull-left">
+                                        <img class="media-object" src="http://placehold.it/50x50" alt="">
+                                    </span>
+                                    <div class="media-body">
+                                        <h5 class="media-heading">
+                                            <strong>John Smith</strong>
+                                        </h5>
+                                        <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
+                                        <p>Lorem ipsum dolor sit amet, consectetur...</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="message-preview">
+                            <a href="#">
+                                <div class="media">
+                                    <span class="pull-left">
+                                        <img class="media-object" src="http://placehold.it/50x50" alt="">
+                                    </span>
+                                    <div class="media-body">
+                                        <h5 class="media-heading">
+                                            <strong>John Smith</strong>
+                                        </h5>
+                                        <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
+                                        <p>Lorem ipsum dolor sit amet, consectetur...</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="message-footer">
+                            <a href="#">Read All New Messages</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> John Smith <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>-->
+            <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav side-nav">
+                  <li>
+                      <a href="charts.html"><i class="fa fa-fw fa-bar-chart-o"></i> Paking Stadistics</a>
+                  </li>
+                  <li>
+                      <a href="tables.html"><i class="fa fa-fw fa-table"></i> Parking Status</a>
+                  </li>
+                  <li class="active">
+                      <a href="FileUpload.html"><i class="fa fa-file-o"></i> Upload a CSV</a>
+                  </li>
+                  <li>
+                      <img src="bot2eyes.fw.png" alt="Toby" class="img-responsive" width= 60% \9 .pull-left>
+                  </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </nav>
+
+        <div id="page-wrapper">
+
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <!-- Container of areas -->
+                <div class="row" id="areaContainer">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            Upload a file
+                        </h1>
+                        <h5 class="page-header">
+                            <input type="file" id="fileInput" value="Choose file"></input>
+                            <input type='submit' value="Seed file" onclick="post()"></input>
+                        </h5>
+                        <h3 id="preview" style="display: none;">File preview: </h3>
+                    </div>
+                    <div class="col-lg-12" >
+                        <div id="sucessmessage" class="alert alert-success" role="alert" style="display:none;"><b>Well done! </b>Server seeded correctly.</div>
+                        <div id="errormessage" class="alert alert-danger" role="alert" style="display:none;"><b>Oh snap!</b> Change a few things up and try submitting again.</div>
+                    </div>
+
+                    <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+                    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
+                    <script type="text/javascript">
+                        var fileInput = document.getElementById('fileInput');
+                        var fileDisplayArea = document.getElementById('fileDisplayArea');
+                        var areas = [];
+
+                        //Definiction object area
+                        var Area = function(name){
+                            this.name = name;
+                            this.generalCapacity = 0;
+                            this.generalAvailable = 0;
+                            this.handicapCapacity = 0;
+                            this.handicapAvailable = 0;
+                            this.priority = 0;
+                        }
+
+                        fileInput.addEventListener('change', function(e) {
+                            var file = fileInput.files[0];
+                            var textType = /text.*/;
+
+                            if (file.type.match(textType)) {
+                                var reader = new FileReader();
+
+                               reader.onload = function(e) {
+                                    var result = reader.result.replace(/\n/g, ",").split(",");
+                                    var lastChar = result[0];
+                                    var temp = new Area(lastChar);
+                                    areas = [];
+                                    //FROM César to Salinas .l.
+                                    for(var i = 0, count = 0, acum = 0, count2 = 1; i < result.length; i++, count2++){
+                                        if(i % 3 == 0 && result[i] !=  lastChar){
+                                            lastChar = result[i];
+
+                                            temp.generalCapacity = parseInt(result[i-2]);
+                                            temp.generalAvailable = acum;
+
+                                            areas[count] = temp;
+                                            temp = new Area(lastChar);
+                                            acum = 0;
+                                            count++;
+                                        }
+
+                                        if(count2%3 == 0){
+                                           acum += parseInt(result[i]);
+                                        }
+
+                                    }
+                                    printAreas(areas);
+                                }
+                                reader.readAsText(file);
+                            }
+                            else {
+                                fileDisplayArea.innerText = "File not supported!"
+                            }
+                        });
+
+                        function printAreas(array){
+                            var div = document.getElementById('Area');
+
+                            for(var i = 0; i < array.length; i++){
+                                var clone = div.cloneNode(true);
+                                clone.id = "Area-" + array[i]["name"];
+                                clone.style.display = "block";
+
+                                $(clone).find('#area').text(" Area " + array[i]["name"]);
+                                $(clone).find('#gCapacity').text(array[i]["generalCapacity"]);
+                                $(clone).find('#hCapacity').text(array[i]["handicapCapacity"]);
+                                $(clone).find('#gAvailable').text(array[i]["generalAvailable"]);
+                                $(clone).find('#hAvailable').text(array[i]["handicapAvailable"]);
+                                $(clone).find('#priority').text(array[i]["priority"]);
+                                document.getElementById("areaContainer").appendChild(clone);
+                                $("#preview").show();
+                            }
+                        }
+
+                        function post(){
+                          console.log("posting");
+                          jQuery.ajax({
+                                    url: "http://10.43.14.124:3000/api/seed" ,
+                                    type: "POST",
+                                    data: {data: JSON.stringify(areas) },
+                                    dataType: "json",
+                                    beforeSend: function(x) {
+                                      if (x && x.overrideMimeType) {
+                                        x.overrideMimeType("application/j-son;charset=UTF-8");
+                                      }
+                                    },
+                                    success: function(result) {
+                                      $(".remove").remove();
+                                    },
+                                    error: function(result){
+                                      $(".remove").remove();
+                                    }
+                          });
+                          $("#sucessmessage").show();
+                          $("#preview").hide();
+
+                        }
+                    </script>
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+  <div class="col-lg-4 remove" id = "Area" style="display: none;">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title"><i class="fa fa-file-o" id="area"></i></h3>
+            </div>
+            <div class="panel-body">
+                <div class="list-group">
+                    <a href="#" class="list-group-item">
+                        <span class="badge" id="gCapacity">just now</span>
+                        <i class="fa fa-car"></i> General capacity
+                    </a>
+                    <a href="#" class="list-group-item">
+                        <span class="badge" id="hCapacity">4 minutes ago</span>
+                        <i class="fa fa-wheelchair"></i> Handicapped Capacity
+                    </a>
+                    <a href="#" class="list-group-item">
+                        <span class="badge" id="gAvailable">23 minutes ago</span>
+                        <i class="fa fa-car"></i> General Available
+                    </a>
+                    <a href="#" class="list-group-item">
+                        <span class="badge" id="hAvailable">46 minutes ago</span>
+                        <i class="fa fa-wheelchair"></i> Handicapped Available
+                    </a>
+                    <a href="#" class="list-group-item">
+                        <span class="badge" id="priority">1 hour ago</span>
+                        <i class="fa fa-star"></i> Priority
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>'
+
+</body>
+
+</html>
